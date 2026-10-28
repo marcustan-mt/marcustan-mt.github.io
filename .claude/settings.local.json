@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:marcustan.super.site)",
+      "Bash(git:*)",
+      "Bash(gh auth:*)"
+    ]
+  }
+}

@@ -1,0 +1,63 @@
+---
+layout: default
+title: Home
+---
+<div class="hero">
+  <h1>Hey, I'm Marcus.</h1>
+  <p class="intro">
+    Welcome to my learning portal. I'm a Singaporean based in Seattle, working as a BI Engineer at Amazon.
+    I spend my time orchestrating data workflows, crafting visualizations, building predictive models, and figuring out deployment strategies.
+    This site is where I write about what I'm learning — let's learn together.
+  </p>
+  <blockquote>
+    Data is the paint, and our minds are the canvas — each stroke revealing patterns, insights, and the masterpiece of understanding.
+  </blockquote>
+</div>
+
+<div class="section-title">Writings</div>
+<p style="color: var(--text-secondary); margin-bottom: 1.25rem; font-size: 0.95rem;">
+  Topics I'm learning about recently, from SQL optimization to LLM architectures.
+</p>
+<div class="card-grid">
+  {% assign categories = "Python,SQL,Dashboarding,Machine Learning,LLMs,MLOps,Research" | split: "," %}
+  {% for cat in categories %}
+    {% assign cat_posts = site.writings | where: "category", cat %}
+    {% if cat_posts.size > 0 %}
+      {% assign latest = cat_posts | sort: "order" | reverse | first %}
+      <a href="{{ latest.url | relative_url }}" class="card">
+        <h3>{{ cat }}</h3>
+        <p>{{ cat_posts.size }} article{% if cat_posts.size > 1 %}s{% endif %} — Latest: {{ latest.title | truncatewords: 8 }}</p>
+      </a>
+    {% endif %}
+  {% endfor %}
+</div>
+<div style="margin-top: 1rem;">
+  <a href="{{ '/writings/' | relative_url }}" style="font-size: 0.9rem; font-weight: 500;">View all writings &rarr;</a>
+</div>
+
+<div class="section-title">Reference Resources</div>
+<p style="color: var(--text-secondary); margin-bottom: 1.25rem; font-size: 0.95rem;">
+  Other useful pages for learning.
+</p>
+<div class="resource-grid">
+  <a href="https://lilianweng.github.io" target="_blank" rel="noopener" class="resource-card">
+    <h4>Lil'Log</h4>
+    <p>Lilian Weng</p>
+  </a>
+  <a href="https://eugeneyan.com" target="_blank" rel="noopener" class="resource-card">
+    <h4>Eugene Yan</h4>
+    <p>ML in production</p>
+  </a>
+  <a href="https://karpathy.ai" target="_blank" rel="noopener" class="resource-card">
+    <h4>Andrej Karpathy</h4>
+    <p>Deep learning</p>
+  </a>
+  <a href="https://web.eecs.umich.edu/~just101/" target="_blank" rel="noopener" class="resource-card">
+    <h4>Justin Johnson</h4>
+    <p>Computer vision</p>
+  </a>
+  <a href="https://maitrix.org" target="_blank" rel="noopener" class="resource-card">
+    <h4>Serena Yeung</h4>
+    <p>AI at Stanford</p>
+  </a>
+</div>

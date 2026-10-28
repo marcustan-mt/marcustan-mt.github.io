@@ -1,0 +1,31 @@
+title: Marcus Tan
+description: Learning portal — data engineering, ML, and everything in between.
+url: "https://marcus-tan.com"
+baseurl: ""
+
+permalink: /writings/:slug/
+
+collections:
+  writings:
+    output: true
+    permalink: /writings/:slug/
+
+defaults:
+  - scope:
+      path: ""
+      type: "writings"
+    values:
+      layout: post
+
+markdown: kramdown
+highlighter: rouge
+
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - vendor
