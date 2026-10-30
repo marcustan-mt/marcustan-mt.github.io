@@ -29,3 +29,30 @@ exclude:
   - Gemfile.lock
   - README.md
   - vendor
+
+# Profile shown in the sidebar and on posts
+author:
+  name: Marcus Tan
+  initials: MT
+  avatar: /assets/img/avatar.jpg
+  tagline: Data generalist at heart. Writing about organizational AI transformations, hard engineering blockers, and code solutions.
+  linkedin: https://sg.linkedin.com/in/marcus-tan-zh
+  github: https://github.com/marcustan-mt
+  email: marcustan94@hotmail.com
+
+# Topic order and labels used on Home, Writings, and the sidebar
+topics:
+  - key: Python
+    label: Exploratory Data Analysis — Python
+  - key: SQL
+    label: Exploratory Data Analysis — SQL
+  - key: Dashboarding
+    label: Dashboarding
+  - key: Machine Learning
+    label: Machine Learning Models
+  - key: LLMs
+    label: Large Language Models
+  - key: MLOps
+    label: ML Deployments & Operations
+  - key: Research
+    label: Research

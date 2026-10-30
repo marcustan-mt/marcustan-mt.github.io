@@ -1,0 +1,29 @@
+<aside class="sidebar">
+  <div class="sidebar-inner">
+    <div class="sidebar-top">
+      {% include avatar.html size="lg" %}
+      {% include theme-toggle.html %}
+    </div>
+    <h2 class="sidebar-name">{{ site.author.name }}</h2>
+    <p class="sidebar-count">{{ site.writings.size }} writings</p>
+    <p class="sidebar-bio">{{ site.author.tagline }}</p>
+    <a href="{{ site.author.linkedin }}" target="_blank" rel="noopener" class="btn">Connect</a>
+
+    <h3 class="sidebar-heading">Topics</h3>
+    <ul class="sidebar-list">
+      {% for topic in site.topics %}
+        {% assign count = site.writings | where: "category", topic.key | size %}
+        {% if count > 0 %}
+        <li>
+          <a href="{{ '/writings/' | relative_url }}#{{ topic.key | slugify }}" class="sidebar-topic">
+            <span>{{ topic.key }}</span>
+            <span class="muted">{{ count }} {% if count == 1 %}story{% else %}stories{% endif %}</span>
+          </a>
+        </li>
+        {% endif %}
+      {% endfor %}
+    </ul>
+
+    {% include footer.html %}
+  </div>
+</aside>

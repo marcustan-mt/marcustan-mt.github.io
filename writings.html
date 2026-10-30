@@ -1,39 +1,17 @@
 ---
-layout: default
+layout: profile
 title: Writings
 permalink: /writings/
 ---
-<div class="page">
-  <h1>Writings</h1>
-  <p style="color: var(--text-secondary); margin-bottom: 2.5rem;">
-    Sharing what I'm learning — let's learn together.
-  </p>
-
-  {% assign sorted = site.writings | sort: "order" %}
-
-  {% assign eda_python = sorted | where: "category", "Python" %}
-  {% assign eda_sql = sorted | where: "category", "SQL" %}
-  {% assign dashboarding = sorted | where: "category", "Dashboarding" %}
-  {% assign ml = sorted | where: "category", "Machine Learning" %}
-  {% assign llm = sorted | where: "category", "LLMs" %}
-  {% assign mlops = sorted | where: "category", "MLOps" %}
-  {% assign research = sorted | where: "category", "Research" %}
-
-  {% assign groups = "Python|SQL|Dashboarding|Machine Learning|LLMs|MLOps|Research" | split: "|" %}
-  {% assign group_labels = "Exploratory Data Analysis — Python|Exploratory Data Analysis — SQL|Dashboarding|Machine Learning Models|Large Language Models|ML Deployments & Operations|Research" | split: "|" %}
-
-  {% for group in groups %}
-    {% assign items = sorted | where: "category", group %}
-    {% if items.size > 0 %}
-    <div class="category-group">
-      <h2>{{ group_labels[forloop.index0] }}</h2>
-      {% for item in items %}
-      <a href="{{ item.url | relative_url }}" class="writing-item">
-        <h3>{{ item.title }}</h3>
-        {% if item.subtitle %}<p>{{ item.subtitle }}</p>{% endif %}
-      </a>
-      {% endfor %}
-    </div>
-    {% endif %}
-  {% endfor %}
-</div>
+{% assign sorted = site.writings | sort: "order" | reverse %}
+{% for topic in site.topics %}
+  {% assign items = sorted | where: "category", topic.key %}
+  {% if items.size > 0 %}
+  <section class="topic-group" id="{{ topic.key | slugify }}">
+    <h2 class="topic-heading">{{ topic.label }} <span class="muted">{{ items.size }} {% if items.size == 1 %}story{% else %}stories{% endif %}</span></h2>
+    {% for post in items %}
+      {% include story.html post=post %}
+    {% endfor %}
+  </section>
+  {% endif %}
+{% endfor %}

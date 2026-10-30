@@ -1,21 +1,62 @@
 ---
 layout: default
 ---
-<article class="post">
-  <header class="post-header">
-    <span class="post-category">{{ page.category }}</span>
-    <h1>{{ page.title }}</h1>
-    {% if page.subtitle %}<p class="post-subtitle">{{ page.subtitle }}</p>{% endif %}
+{% assign words = content | number_of_words %}
+{% assign mins = words | divided_by: 265.0 | ceil %}
+<main class="article-wrap">
+  <nav class="article-nav">
+    <a href="{{ '/' | relative_url }}" class="article-home">{% include avatar.html size="sm" %}<span>{{ site.author.name }}</span></a>
+    {% include theme-toggle.html %}
+  </nav>
+  <article class="article">
+    <header class="article-header">
+      <h1 class="article-title">{{ page.title }}</h1>
+      {% if page.subtitle %}<p class="article-subtitle">{{ page.subtitle }}</p>{% endif %}
+      <div class="byline">
+        {% include avatar.html size="md" %}
+        <div>
+          <div class="byline-name">
+            <a href="{{ '/' | relative_url }}">{{ site.author.name }}</a>
+            <span class="dot">·</span>
+            <a href="{{ site.author.linkedin }}" target="_blank" rel="noopener" class="accent">Connect</a>
+          </div>
+          <div class="muted">{{ mins }} min read <span class="dot">·</span> {{ page.category }}</div>
+        </div>
+      </div>
+    </header>
+
+    <div class="article-body">
+      {{ content }}
+    </div>
+
     {% if page.tags.size > 0 %}
-    <div class="post-tags">
-      {% for tag in page.tags %}<span class="tag">{{ tag }}</span>{% endfor %}
+    <div class="article-tags">
+      {% for tag in page.tags %}<span class="pill">{{ tag }}</span>{% endfor %}
     </div>
     {% endif %}
-  </header>
-  <div class="post-content">
-    {{ content }}
-  </div>
-  <footer class="post-footer">
-    <a href="{{ '/writings/' | relative_url }}">&larr; Back to all writings</a>
-  </footer>
-</article>
+  </article>
+
+  <section class="written-by">
+    {% include avatar.html size="lg" %}
+    <h2>Written by {{ site.author.name }}</h2>
+    <p class="muted">{{ site.writings.size }} writings</p>
+    <p>{{ site.author.tagline }}</p>
+  </section>
+
+  {% assign related = site.writings | where: "category", page.category | where_exp: "w", "w.url != page.url" %}
+  {% if related.size == 0 %}{% assign related = site.writings | where_exp: "w", "w.url != page.url" | sort: "order" | reverse %}{% endif %}
+  <section class="more-from">
+    <h2>More from {{ site.author.name }}</h2>
+    <div class="more-grid">
+      {% for item in related limit: 4 %}
+      <a href="{{ item.url | relative_url }}" class="more-card">
+        <div class="story-meta">{% include avatar.html size="xs" %}<span class="story-author">{{ site.author.name }}</span></div>
+        <h3>{{ item.title }}</h3>
+        {% if item.subtitle %}<p>{{ item.subtitle }}</p>{% endif %}
+      </a>
+      {% endfor %}
+    </div>
+    <a href="{{ '/writings/' | relative_url }}" class="btn btn-outline">See all from {{ site.author.name }}</a>
+  </section>
+  <div class="article-footer">{% include footer.html %}</div>
+</main>

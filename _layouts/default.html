@@ -4,28 +4,30 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{% if page.title %}{{ page.title }} — {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
-  <meta name="description" content="{{ page.excerpt | default: site.description | strip_html | truncatewords: 50 }}">
-  <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
+  <meta name="description" content="{{ page.subtitle | default: page.excerpt | default: site.description | strip_html | truncatewords: 50 }}">
+  <script>
+    // Set theme before paint to avoid a flash of the wrong theme
+    (function () {
+      const stored = localStorage.getItem('theme');
+      const dark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      document.documentElement.setAttribute('data-theme', stored || (dark ? 'dark' : 'light'));
+    })();
+  </script>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2250%22 fill=%22%23191919%22/><text x=%2250%22 y=%2264%22 font-family=%22Georgia,serif%22 font-size=%2242%22 font-weight=%22700%22 fill=%22white%22 text-anchor=%22middle%22>MT</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
 </head>
 <body>
-  {% include header.html %}
-  <main class="container">
-    {{ content }}
-  </main>
-  {% include footer.html %}
+  {{ content }}
   <script>
-    const toggle = document.getElementById('theme-toggle');
-    const html = document.documentElement;
-    const stored = localStorage.getItem('theme');
-    if (stored) html.setAttribute('data-theme', stored);
-    else if (window.matchMedia('(prefers-color-scheme: dark)').matches) html.setAttribute('data-theme', 'dark');
-    toggle.addEventListener('click', () => {
+    document.querySelectorAll('.theme-toggle').forEach((btn) => btn.addEventListener('click', () => {
+      const html = document.documentElement;
       const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
       html.setAttribute('data-theme', next);
       localStorage.setItem('theme', next);
-    });
+    }));
   </script>
 </body>
 </html>

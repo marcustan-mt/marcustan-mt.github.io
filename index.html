@@ -1,63 +1,27 @@
 ---
-layout: default
-title: Home
+layout: profile
+title: About
 ---
-<div class="hero">
-  <h1>Hey, I'm Marcus.</h1>
-  <p class="intro">
-    Welcome to my learning portal. I'm a Singaporean based in Seattle, working as a BI Engineer at Amazon.
-    I spend my time orchestrating data workflows, crafting visualizations, building predictive models, and figuring out deployment strategies.
-    This site is where I write about what I'm learning — let's learn together.
+<div class="about">
+  <h2>Hi, I'm Marcus Tan! 👋</h2>
+  <p>I'm a data generalist at heart, leveraging data science and engineering to solve big, systemic problems within organizations.</p>
+  <p>💡 <strong>Fun fact:</strong> I was on the team that successfully rolled out Alexa+ to millions of active users. Today, I use that heavy-lifting experience to engage with clients, helping engineering organizations realize the tangible value of AI and navigating the complex, hard-to-solve problems that come with organizational transformation.</p>
+
+  <h2>Welcome to my Digital Garden 🌱</h2>
+  <p>This space is an open log of what I’ve learned guiding organizations through AI transformations. Inside, I break down the high-level operational hurdles and the persistent technical roadblocks I hear about constantly, translating them into actionable strategies that work.</p>
+  <p>Here is what this site is for:</p>
+  <ul>
+    <li><strong>AI Transformation Reflections:</strong> Less of an expert lecture and more of an open sharing session on the lessons I've learned helping organizations adopt AI. I’ll share my viewpoint on these organizational shifts—alongside the key papers and videos that shape my perspectives—exploring everything from evolving, open-ended discussions to definitive, industry-standard practices.</li>
+    <li><strong>Technical Blockers &amp; Code Solutions:</strong> The exact engineering roadblocks I encounter during organizational transformations, how we went about solving them, and the actual code repositories or functional snippets you can use to resolve these complex engineering problems.</li>
+  </ul>
+</div>
+
+<div class="about-meta">
+  <p class="muted">{{ site.writings.size }} writings across {{ site.topics.size }} topics</p>
+  <p class="about-connect">
+    Connect with {{ site.author.name }}
+    <a href="{{ site.author.linkedin }}" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="{{ site.author.github }}" target="_blank" rel="noopener">GitHub</a>
+    <a href="mailto:{{ site.author.email }}">Email</a>
   </p>
-  <blockquote>
-    Data is the paint, and our minds are the canvas — each stroke revealing patterns, insights, and the masterpiece of understanding.
-  </blockquote>
-</div>
-
-<div class="section-title">Writings</div>
-<p style="color: var(--text-secondary); margin-bottom: 1.25rem; font-size: 0.95rem;">
-  Topics I'm learning about recently, from SQL optimization to LLM architectures.
-</p>
-<div class="card-grid">
-  {% assign categories = "Python,SQL,Dashboarding,Machine Learning,LLMs,MLOps,Research" | split: "," %}
-  {% for cat in categories %}
-    {% assign cat_posts = site.writings | where: "category", cat %}
-    {% if cat_posts.size > 0 %}
-      {% assign latest = cat_posts | sort: "order" | reverse | first %}
-      <a href="{{ latest.url | relative_url }}" class="card">
-        <h3>{{ cat }}</h3>
-        <p>{{ cat_posts.size }} article{% if cat_posts.size > 1 %}s{% endif %} — Latest: {{ latest.title | truncatewords: 8 }}</p>
-      </a>
-    {% endif %}
-  {% endfor %}
-</div>
-<div style="margin-top: 1rem;">
-  <a href="{{ '/writings/' | relative_url }}" style="font-size: 0.9rem; font-weight: 500;">View all writings &rarr;</a>
-</div>
-
-<div class="section-title">Reference Resources</div>
-<p style="color: var(--text-secondary); margin-bottom: 1.25rem; font-size: 0.95rem;">
-  Other useful pages for learning.
-</p>
-<div class="resource-grid">
-  <a href="https://lilianweng.github.io" target="_blank" rel="noopener" class="resource-card">
-    <h4>Lil'Log</h4>
-    <p>Lilian Weng</p>
-  </a>
-  <a href="https://eugeneyan.com" target="_blank" rel="noopener" class="resource-card">
-    <h4>Eugene Yan</h4>
-    <p>ML in production</p>
-  </a>
-  <a href="https://karpathy.ai" target="_blank" rel="noopener" class="resource-card">
-    <h4>Andrej Karpathy</h4>
-    <p>Deep learning</p>
-  </a>
-  <a href="https://web.eecs.umich.edu/~just101/" target="_blank" rel="noopener" class="resource-card">
-    <h4>Justin Johnson</h4>
-    <p>Computer vision</p>
-  </a>
-  <a href="https://maitrix.org" target="_blank" rel="noopener" class="resource-card">
-    <h4>Serena Yeung</h4>
-    <p>AI at Stanford</p>
-  </a>
 </div>

@@ -1,5 +1,5 @@
 source "https://rubygems.org"
 
-gem "jekyll", "~> 4.3"
-gem "jekyll-seo-tag"
+# Matches the Jekyll version and plugins used by GitHub Pages
+gem "github-pages", group: :jekyll_plugins
 gem "webrick"

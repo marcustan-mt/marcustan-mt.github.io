@@ -1,0 +1,1 @@
+{% if site.author.avatar != "" %}<img class="avatar avatar-{{ include.size }}" src="{{ site.author.avatar | relative_url }}" alt="{{ site.author.name }}">{% else %}<span class="avatar avatar-{{ include.size }}" aria-hidden="true">{{ site.author.initials }}</span>{% endif %}

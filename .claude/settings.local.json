@@ -3,7 +3,13 @@
     "allow": [
       "WebFetch(domain:marcustan.super.site)",
       "Bash(git:*)",
-      "Bash(gh auth:*)"
+      "Bash(gh auth:*)",
+      "Bash(claude:*)",
+      "Bash(npm show:*)",
+      "Bash(npm install:*)",
+      "Bash(npm update:*)",
+      "Bash(npm view:*)",
+      "Bash(npm list:*)"
     ]
   }
 }
